@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<head><title layout:fragment="title">Tasks</title>
+    <link th:href="@{/css/tailwind.css}" rel="stylesheet" />
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="flex items-center justify-between mb-4">
+        <h1 class="text-2xl font-semibold">Tasks</h1>
+        <a class="px-3 py-2 rounded bg-green-600 text-white" th:href="@{/tasks/add}">Add Task</a>
+    </div>
+
+    <div class="overflow-x-auto rounded border bg-white">
+        <table class="min-w-full text-sm">
+            <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2 text-left">#</th>
+                <th class="px-4 py-2 text-left">Name</th>
+                <th class="px-4 py-2 text-left">Deadline</th>
+                <th class="px-4 py-2 text-left">Status</th>
+                <th class="px-4 py-2"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${tasks}">
+                <td class="px-4 py-2" th:text="${t.id}">1</td>
+                <td class="px-4 py-2" th:text="${t.name}">Task</td>
+                <td class="px-4 py-2" th:text="${t.deadlineDate}">2025-10-10</td>
+                <td class="px-4 py-2">
+            <span th:text="${t.completed} ? 'Completed' : 'Open'"
+                  th:classappend="${t.completed} ? 'text-green-700' : 'text-yellow-700'">Open</span>
+                </td>
+                <td class="px-4 py-2 text-right space-x-2">
+                    <a class="underline" th:href="@{|/tasks/${t.id}|}">View</a>
+                    <a class="underline" th:href="@{|/tasks/${t.id}/edit|}">Edit</a>
+                    <form th:action="@{|/tasks/${t.id}/delete|}" method="post" class="inline">
+                        <button class="underline text-red-700">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

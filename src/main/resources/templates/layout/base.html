@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="this :: title">App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/tailwind.css}" rel="stylesheet"/>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900">
+<header class="bg-white shadow">
+    <div class="mx-auto max-w-5xl px-4 py-4 flex justify-between">
+        <a href="/" class="font-semibold"></a>
+        <nav class="space-x-4">
+            <a class="hover:underline" th:href="@{/students}">Students</a>
+            <a class="hover:underline" th:href="@{/tasks}">Tasks</a>
+        </nav>
+    </div>
+</header>
+
+<main class="mx-auto max-w-5xl px-4 py-6" layout:fragment="content">
+
+</main>
+
+<footer class="mx-auto max-w-5xl px-4 py-8 text-sm text-gray-500">
+    © 2025
+</footer>
+</body>
+</html>

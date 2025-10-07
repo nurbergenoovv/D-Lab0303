@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<head><title layout:fragment="title">Task Details</title>
+    <link th:href="@{/css/tailwind.css}" rel="stylesheet" />
+</head>
+<body>
+<main layout:fragment="content" th:with="t=${task}">
+    <h1 class="text-2xl font-semibold mb-4">Task Details</h1>
+    <div class="rounded border bg-white p-4 space-y-2">
+        <div><span class="font-semibold">ID:</span> <span th:text="${t.id}">1</span></div>
+        <div><span class="font-semibold">Name:</span> <span th:text="${t.name}">Task</span></div>
+        <div><span class="font-semibold">Deadline:</span> <span th:text="${t.deadlineDate}">2025-10-10</span></div>
+        <div><span class="font-semibold">Status:</span>
+            <span th:text="${t.completed} ? 'Completed' : 'Open'">Open</span>
+        </div>
+    </div>
+    <div class="mt-4 flex gap-2">
+        <a class="px-3 py-2 rounded border" th:href="@{/tasks}">Back</a>
+        <a class="px-3 py-2 rounded bg-blue-600 text-white" th:href="@{|/tasks/${t.id}/edit|}">Edit</a>
+        <form th:action="@{|/tasks/${t.id}/delete|}" method="post">
+            <button class="px-3 py-2 rounded bg-red-600 text-white">Delete</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>
